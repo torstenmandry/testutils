@@ -55,4 +55,8 @@ public class DateBuilder {
     public Date toDate() {
         return calendar.getTime();
     }
+
+    public java.sql.Date toSqlDate() {
+        return new java.sql.Date(calendar.getTimeInMillis());
+    }
 }

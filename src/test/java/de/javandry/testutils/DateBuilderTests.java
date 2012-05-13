@@ -48,22 +48,46 @@ public class DateBuilderTests {
     public void toUtilDate() {
         DateBuilder dateBuilder = DateBuilder.givenDate(14, 12, 1972);
 
-        Calendar cal = calendarFor(dateBuilder.toDate());
+        Calendar utilDateCalendar = calendarFor(dateBuilder.toDate());
 
-        assertEquals(14, cal.get(Calendar.DAY_OF_MONTH));
-        assertEquals(12, cal.get(Calendar.MONTH) + 1);
-        assertEquals(1972, cal.get(Calendar.YEAR));
+        assertEquals(14, getDayOfMonth(utilDateCalendar));
+        assertEquals(12, getMonth(utilDateCalendar));
+        assertEquals(1972, getYear(utilDateCalendar));
+    }
+
+    @Test
+    public void toSqlDate() {
+        DateBuilder dateBuilder = DateBuilder.givenDate(14, 12, 1972);
+
+        java.sql.Date sqlDate = dateBuilder.toSqlDate();
+        Calendar sqlDateCalendar = calendarFor(sqlDate);
+
+        assertEquals(14, getDayOfMonth(sqlDateCalendar));
+        assertEquals(12, getMonth(sqlDateCalendar));
+        assertEquals(1972, getYear(sqlDateCalendar));
     }
 
     private void assertEqualsCalendar(Calendar cal, DateBuilder today) {
-        assertEquals(cal.get(Calendar.DAY_OF_MONTH), today.getDay());
-        assertEquals(cal.get(Calendar.MONTH) + 1, today.getMonth());
-        assertEquals(cal.get(Calendar.YEAR), today.getYear());
+        assertEquals(getDayOfMonth(cal), today.getDay());
+        assertEquals(getMonth(cal), today.getMonth());
+        assertEquals(getYear(cal), today.getYear());
     }
 
     private Calendar calendarFor(Date utilDate) {
         Calendar cal = GregorianCalendar.getInstance();
         cal.setTime(utilDate);
         return cal;
+    }
+
+    private int getDayOfMonth(Calendar utilDateCalendar) {
+        return utilDateCalendar.get(Calendar.DAY_OF_MONTH);
+    }
+
+    private int getMonth(Calendar sqlDateCalendar) {
+        return sqlDateCalendar.get(Calendar.MONTH) + 1;
+    }
+
+    private int getYear(Calendar sqlDateCalendar) {
+        return sqlDateCalendar.get(Calendar.YEAR);
     }
 }
