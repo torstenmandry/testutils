@@ -1,6 +1,7 @@
 package de.javandry.testutils;
 
 import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 import static java.util.Calendar.DAY_OF_MONTH;
@@ -19,6 +20,10 @@ public class DateBuilder {
         return new DateBuilder(day, month, year);
     }
 
+    public static DateBuilder valueOf(Date date) {
+        return new DateBuilder(date);
+    }
+
     private DateBuilder() {
         calendar = new GregorianCalendar();
     }
@@ -28,6 +33,11 @@ public class DateBuilder {
         calendar.set(DAY_OF_MONTH, day);
         calendar.set(MONTH, month - 1);
         calendar.set(YEAR, year);
+    }
+
+    public DateBuilder(Date date) {
+        this();
+        calendar.setTime(date);
     }
 
     public int getDay() {
