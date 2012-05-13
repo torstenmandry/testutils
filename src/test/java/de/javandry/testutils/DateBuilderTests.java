@@ -53,6 +53,7 @@ public class DateBuilderTests {
         assertEquals(14, getDayOfMonth(utilDateCalendar));
         assertEquals(12, getMonth(utilDateCalendar));
         assertEquals(1972, getYear(utilDateCalendar));
+        assertNoTime(utilDateCalendar);
     }
 
     @Test
@@ -65,12 +66,20 @@ public class DateBuilderTests {
         assertEquals(14, getDayOfMonth(sqlDateCalendar));
         assertEquals(12, getMonth(sqlDateCalendar));
         assertEquals(1972, getYear(sqlDateCalendar));
+        assertNoTime(sqlDateCalendar);
     }
 
     private void assertEqualsCalendar(Calendar cal, DateBuilder today) {
         assertEquals(getDayOfMonth(cal), today.getDay());
         assertEquals(getMonth(cal), today.getMonth());
         assertEquals(getYear(cal), today.getYear());
+    }
+
+    private void assertNoTime(Calendar utilDateCalendar) {
+        assertEquals(0, utilDateCalendar.get(Calendar.HOUR_OF_DAY));
+        assertEquals(0, utilDateCalendar.get(Calendar.MINUTE));
+        assertEquals(0, utilDateCalendar.get(Calendar.SECOND));
+        assertEquals(0, utilDateCalendar.get(Calendar.MILLISECOND));
     }
 
     private Calendar calendarFor(Date utilDate) {

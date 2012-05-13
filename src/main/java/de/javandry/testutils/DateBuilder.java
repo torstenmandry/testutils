@@ -4,9 +4,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import static java.util.Calendar.DAY_OF_MONTH;
-import static java.util.Calendar.MONTH;
-import static java.util.Calendar.YEAR;
+import static java.util.Calendar.*;
 
 public class DateBuilder {
 
@@ -26,6 +24,10 @@ public class DateBuilder {
 
     private DateBuilder() {
         calendar = new GregorianCalendar();
+        calendar.set(HOUR_OF_DAY, 0);
+        calendar.set(MINUTE, 0);
+        calendar.set(SECOND, 0);
+        calendar.set(MILLISECOND, 0);
     }
 
     private DateBuilder(int day, int month, int year) {
@@ -35,7 +37,7 @@ public class DateBuilder {
         calendar.set(YEAR, year);
     }
 
-    public DateBuilder(Date date) {
+    private DateBuilder(Date date) {
         this();
         calendar.setTime(date);
     }
