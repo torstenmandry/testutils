@@ -51,4 +51,8 @@ public class DateBuilder {
     public int getYear() {
         return calendar.get(YEAR);
     }
+
+    public Date toDate() {
+        return calendar.getTime();
+    }
 }
