@@ -18,4 +18,13 @@ public class DateBuilderTests {
         assertEquals(cal.get(Calendar.MONTH) + 1, today.getMonth());
         assertEquals(cal.get(Calendar.YEAR), today.getYear());
     }
+
+    @Test
+    public void givenDate() {
+        DateBuilder givenDate = DateBuilder.givenDate(14, 12, 1972);
+
+        assertEquals(14, givenDate.getDay());
+        assertEquals(12, givenDate.getMonth());
+        assertEquals(1972, givenDate.getYear());
+    }
 }
