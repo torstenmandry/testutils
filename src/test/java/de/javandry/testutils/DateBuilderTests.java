@@ -1,5 +1,6 @@
 package de.javandry.testutils;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Calendar;
@@ -9,12 +10,16 @@ import static org.junit.Assert.assertEquals;
 
 public class DateBuilderTests {
 
+    private Calendar calendar;
+
+    @Before
+    public void setUp() throws Exception {
+        calendar = GregorianCalendar.getInstance();
+    }
+
     @Test
     public void today() {
-        Calendar cal = GregorianCalendar.getInstance();
-        DateBuilder today = DateBuilder.today();
-
-        assertEqualsCalendar(cal, today);
+        assertEqualsCalendar(calendar, DateBuilder.today());
     }
 
     @Test
@@ -28,11 +33,14 @@ public class DateBuilderTests {
 
     @Test
     public void valueOfUtilDate() {
-        Calendar cal = GregorianCalendar.getInstance();
-        java.util.Date utilDate = cal.getTime();
-        DateBuilder dateBuilder = DateBuilder.valueOf(utilDate);
+        java.util.Date utilDate = calendar.getTime();
+        assertEqualsCalendar(calendar, DateBuilder.valueOf(utilDate));
+    }
 
-        assertEqualsCalendar(cal, dateBuilder);
+    @Test
+    public void valueOfSqlDate() {
+        java.sql.Date sqlDate = new java.sql.Date(calendar.getTimeInMillis());
+        assertEqualsCalendar(calendar, DateBuilder.valueOf(sqlDate));
     }
 
     private void assertEqualsCalendar(Calendar cal, DateBuilder today) {
