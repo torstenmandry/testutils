@@ -1,17 +1,13 @@
 package de.javandry.testutils;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 public class DateBuilderTests {
-
-    DateBuilder dateBuilder;
 
     @Test
     public void today() {
