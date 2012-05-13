@@ -1,8 +1,12 @@
 package de.javandry.testutils;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import static java.util.Calendar.*;
 
@@ -20,6 +24,10 @@ public class DateBuilder {
 
     public static DateBuilder valueOf(Date date) {
         return new DateBuilder(date);
+    }
+
+    public static DateBuilder parse(String dateString) {
+        return new DateBuilder(dateString);
     }
 
     private DateBuilder() {
@@ -42,6 +50,16 @@ public class DateBuilder {
         calendar.setTime(date);
     }
 
+    public DateBuilder(String dateString) {
+        this();
+        DateFormat dateFormat = DateFormat.getDateInstance();
+        try {
+            calendar.setTime(dateFormat.parse(dateString));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     public int getDay() {
         return calendar.get(DAY_OF_MONTH);
     }
@@ -52,6 +70,11 @@ public class DateBuilder {
 
     public int getYear() {
         return calendar.get(YEAR);
+    }
+
+    public DateBuilder daysAgo(int days) {
+        calendar.add(DAY_OF_MONTH, -days);
+        return this;
     }
 
     public Date toDate() {

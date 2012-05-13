@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
 import static org.junit.Assert.assertEquals;
 
@@ -42,6 +43,34 @@ public class DateBuilderTests {
     public void valueOfSqlDate() {
         java.sql.Date sqlDate = new java.sql.Date(calendar.getTimeInMillis());
         assertEqualsCalendar(calendar, DateBuilder.valueOf(sqlDate));
+    }
+
+    @Test
+    // TODO Weitere Beispiele
+    public void parseString() {
+        parseString(Locale.GERMANY, "14.12.1972", 14, 12, 1972);
+    }
+
+    private void parseString(Locale locale, String dateString, int expectedDay, int expectedMonth, int expectedYear) {
+        Locale.setDefault(locale);
+        DateBuilder dateBuilder = DateBuilder.parse(dateString);
+
+        assertEquals(expectedDay, dateBuilder.getDay());
+        assertEquals(expectedMonth, dateBuilder.getMonth());
+        assertEquals(expectedYear, dateBuilder.getYear());
+    }
+
+    @Test
+    // TODO weitere Beispiele
+    public void daysAgo() {
+        Locale.setDefault(Locale.GERMANY);
+        DateBuilder dateBuilder = DateBuilder.parse("14.12.1972");
+
+        dateBuilder.daysAgo(2);
+
+        assertEquals(12, dateBuilder.getDay());
+        assertEquals(12, dateBuilder.getMonth());
+        assertEquals(1972, dateBuilder.getYear());
     }
 
     @Test
