@@ -90,6 +90,11 @@ public class DateBuilder {
     }
 
     @Override
+    public String toString() {
+        return DateFormat.getDateInstance().format(calendar.getTime());
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

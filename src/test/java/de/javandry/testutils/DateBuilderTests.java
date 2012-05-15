@@ -121,6 +121,16 @@ public class DateBuilderTests {
         assertNoTime(sqlDateCalendar);
     }
 
+    @Test
+    public void testToString() {
+        Locale.setDefault(Locale.GERMANY);
+        assertEquals(DateBuilder.givenDate(14, 12, 1972).toString(), "14.12.1972");
+        Locale.setDefault(Locale.US);
+        assertEquals(DateBuilder.givenDate(14, 12, 1972).toString(), "Dec 14, 1972");
+        Locale.setDefault(Locale.UK);
+        assertEquals(DateBuilder.givenDate(14, 12, 1972).toString(), "14-Dec-1972");
+    }
+
     private void assertEqualsCalendar(Calendar cal, DateBuilder today) {
         assertEquals(getDayOfMonth(cal), today.getDay());
         assertEquals(getMonth(cal), today.getMonth());
