@@ -66,6 +66,14 @@ public class DateBuilderTests {
     }
 
     @Test
+    public void testParseStringWithGivenFormat() {
+        Locale.setDefault(Locale.US);
+        assertEquals(DateBuilder.givenDate(14, 12, 1972), DateBuilder.parse("14.12.1972", "dd.MM.yyyy"));
+        assertEquals(DateBuilder.givenDate(14, 12, 1972), DateBuilder.parse("Dec 14, 1972", "MMM dd, yyyy"));
+        assertEquals(DateBuilder.givenDate(14, 12, 1972), DateBuilder.parse("14-Dec-1972", "dd-MMM-yyyy"));
+    }
+
+    @Test
     public void daysAgo() {
         Locale.setDefault(Locale.GERMANY);
         assertEquals(DateBuilder.givenDate(14, 12, 1972).daysAgo(2), DateBuilder.givenDate(12, 12, 1972));
