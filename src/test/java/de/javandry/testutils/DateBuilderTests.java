@@ -46,9 +46,10 @@ public class DateBuilderTests {
     }
 
     @Test
-    // TODO Weitere Beispiele
+    // TODO Weitere Beispiele mit anderen Locales und Formaten
     public void parseString() {
         parseString(Locale.GERMANY, "14.12.1972", 14, 12, 1972);
+        parseString(Locale.GERMANY, "29.02.2012", 29, 2, 2012);
     }
 
     private void parseString(Locale locale, String dateString, int expectedDay, int expectedMonth, int expectedYear) {
@@ -61,16 +62,22 @@ public class DateBuilderTests {
     }
 
     @Test
-    // TODO weitere Beispiele
     public void daysAgo() {
         Locale.setDefault(Locale.GERMANY);
-        DateBuilder dateBuilder = DateBuilder.parse("14.12.1972");
+        assertDaysAgo(14, 12, 1972, 2, 12, 12, 1972);
+        assertDaysAgo(14, 12, 1972, 5, 9, 12, 1972);
+        assertDaysAgo(1, 12, 1972, 1, 30, 11, 1972);
+        assertDaysAgo(1, 1, 1972, 1, 31, 12, 1971);
+    }
 
-        dateBuilder.daysAgo(2);
+    private void assertDaysAgo(int givenDay, int givenMonth, int givenYear, int days, int expectedDay, int expectedMonth, int expectedYear) {
+        DateBuilder dateBuilder = DateBuilder.givenDate(givenDay, givenMonth, givenYear);
 
-        assertEquals(12, dateBuilder.getDay());
-        assertEquals(12, dateBuilder.getMonth());
-        assertEquals(1972, dateBuilder.getYear());
+        dateBuilder.daysAgo(days);
+
+        assertEquals(expectedDay, dateBuilder.getDay());
+        assertEquals(expectedMonth, dateBuilder.getMonth());
+        assertEquals(expectedYear, dateBuilder.getYear());
     }
 
     @Test
