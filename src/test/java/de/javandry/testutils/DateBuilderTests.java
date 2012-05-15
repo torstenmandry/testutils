@@ -85,6 +85,12 @@ public class DateBuilderTests {
     }
 
     @Test
+    public void previousDay() {
+        assertEquals(DateBuilder.givenDate(13, 12, 1972), DateBuilder.givenDate(14, 12, 1972).previousDay());
+        assertEquals(DateBuilder.givenDate(31, 12, 1971), DateBuilder.givenDate( 1,  1, 1972).previousDay());
+    }
+
+    @Test
     public void testDaysAhead() {
         Locale.setDefault(Locale.GERMANY);
         assertEquals(DateBuilder.givenDate(16, 12, 1972), DateBuilder.givenDate(14, 12, 1972).daysAhead(2));
@@ -96,10 +102,29 @@ public class DateBuilderTests {
     }
 
     @Test
+    public void nextDay() {
+        assertEquals(DateBuilder.givenDate(15, 12, 1972), DateBuilder.givenDate(14, 12, 1972).nextDay());
+        assertEquals(DateBuilder.givenDate( 1,  1, 1973), DateBuilder.givenDate(31, 12, 1972).nextDay());
+    }
+
+    @Test
     public void testDay() {
         assertEquals(DateBuilder.givenDate( 1, 12, 1972), DateBuilder.givenDate(14, 12, 1972).day(1));
         assertEquals(DateBuilder.givenDate(10, 12, 1972), DateBuilder.givenDate(14, 12, 1972).day(10));
         assertEquals(DateBuilder.givenDate( 1,  1, 1973), DateBuilder.givenDate(14, 12, 1972).day(32));
+    }
+
+    @Test
+    public void testFirstDay() {
+        assertEquals(DateBuilder.givenDate( 1, 12, 1972), DateBuilder.givenDate(14, 12, 1972).firstDay());
+        assertEquals(DateBuilder.givenDate( 1, 12, 1972), DateBuilder.givenDate(31, 12, 1972).firstDay());
+    }
+
+    @Test
+    public void testLastDay() {
+        assertEquals(DateBuilder.givenDate(31, 12, 1972), DateBuilder.givenDate(14, 12, 1972).lastDay());
+        assertEquals(DateBuilder.givenDate(30,  4, 1972), DateBuilder.givenDate(11,  4, 1972).lastDay());
+        assertEquals(DateBuilder.givenDate(29,  2, 2012), DateBuilder.givenDate(11,  2, 2012).lastDay());
     }
 
     @Test

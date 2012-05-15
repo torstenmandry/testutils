@@ -164,6 +164,14 @@ public class DateBuilder {
     }
 
     /**
+     * Returns the current DateBuilder instance decremented by one day.
+     * @return the decremented DateBuilder instance.
+     */
+    public DateBuilder previousDay() {
+        return daysAgo(1);
+    }
+
+    /**
      * Returns the current DateBuilder instance incremented by the given number of days.
      * @param days the number of days.
      * @return the incremented DateBuilder instance.
@@ -174,6 +182,14 @@ public class DateBuilder {
     }
 
     /**
+     * Returns the current DateBuilder instance incremented by one day.
+     * @return the incremented DateBuilder instance.
+     */
+    public DateBuilder nextDay() {
+        return daysAhead(1);
+    }
+
+    /**
      * Returns the current DateBuilder instance with the day of month set to the given day.
      * @param day the day.
      * @return the modified DateBuilder instance.
@@ -181,6 +197,22 @@ public class DateBuilder {
     public DateBuilder day(int day) {
         calendar.set(DAY_OF_MONTH, day);
         return this;
+    }
+
+    /**
+     * Returns the current DateBuilder instance set to the first day of the month.
+     * @return the modified DateBuilder instance.
+     */
+    public DateBuilder firstDay() {
+        return day(1);
+    }
+
+    /**
+     * Returns the current DateBuilder instance set to the last day of the month.
+     * @return the modified DateBuilder instance.
+     */
+    public DateBuilder lastDay() {
+        return monthsAhead(1).firstDay().daysAgo(1);
     }
 
     /**
