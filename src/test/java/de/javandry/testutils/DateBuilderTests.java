@@ -9,6 +9,8 @@ import java.util.GregorianCalendar;
 import java.util.Locale;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class DateBuilderTests {
 
@@ -78,6 +80,17 @@ public class DateBuilderTests {
         assertEquals(expectedDay, dateBuilder.getDay());
         assertEquals(expectedMonth, dateBuilder.getMonth());
         assertEquals(expectedYear, dateBuilder.getYear());
+    }
+
+    @Test
+    public void equals() {
+        Locale.setDefault(Locale.GERMANY);
+        DateBuilder givenDate = DateBuilder.givenDate(14, 12, 1972);
+
+        assertTrue(givenDate.equals(givenDate));
+        assertTrue(givenDate.equals(DateBuilder.givenDate(14, 12, 1972)));
+        assertTrue(givenDate.equals(DateBuilder.parse("14.12.1972")));
+        assertFalse(givenDate.equals(DateBuilder.givenDate(14, 12, 1973)));
     }
 
     @Test
