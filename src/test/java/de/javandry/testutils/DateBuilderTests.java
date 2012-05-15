@@ -185,11 +185,23 @@ public class DateBuilderTests {
     }
 
     @Test
+    public void testPreviousYear() {
+        assertEquals(DateBuilder.givenDate(14, 12, 1971), DateBuilder.givenDate(14, 12, 1972).previousYear());
+        assertEquals(DateBuilder.givenDate( 1,  1, 2011), DateBuilder.givenDate( 1,  1, 2012).previousYear());
+    }
+
+    @Test
     public void testYearsAhead() {
         Locale.setDefault(Locale.GERMANY);
         assertEquals(DateBuilder.givenDate(14, 12, 1973), DateBuilder.givenDate(14, 12, 1972).yearsAhead(1));
         assertEquals(DateBuilder.givenDate(14, 12, 1972), DateBuilder.givenDate(14, 12, 1972).yearsAhead(0));
         assertEquals(DateBuilder.givenDate(14, 12, 1970), DateBuilder.givenDate(14, 12, 1972).yearsAhead(-2));
+    }
+
+    @Test
+    public void testNextYear() {
+        assertEquals(DateBuilder.givenDate(14, 12, 1972), DateBuilder.givenDate(14, 12, 1971).nextYear());
+        assertEquals(DateBuilder.givenDate( 1,  1, 2012), DateBuilder.givenDate( 1,  1, 2011).nextYear());
     }
 
     @Test

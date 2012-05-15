@@ -286,6 +286,14 @@ public class DateBuilder {
     }
 
     /**
+     * Returns the current DateBuilder instance decremented by one year.
+     * @return the decremented DateBuilder instance.
+     */
+    public DateBuilder previousYear() {
+        return yearsAgo(1);
+    }
+
+    /**
      * Returns the current DateBuilder instance incremented by the given number of years.
      * @param years the number of years.
      * @return the incremented DateBuilder instance.
@@ -293,6 +301,14 @@ public class DateBuilder {
     public DateBuilder yearsAhead(int years) {
         calendar.add(YEAR, years);
         return this;
+    }
+
+    /**
+     * Returns the current DateBuilder instance incremented by one year.
+     * @return the incremented DateBuilder instance.
+     */
+    public DateBuilder nextYear() {
+        return yearsAhead(1);
     }
 
     /**
