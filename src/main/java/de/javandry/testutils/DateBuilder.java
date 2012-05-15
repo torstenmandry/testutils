@@ -98,9 +98,9 @@ public class DateBuilder {
 
     private DateBuilder(int day, int month, int year) {
         this();
-        calendar.set(DAY_OF_MONTH, day);
-        calendar.set(MONTH, month - 1);
-        calendar.set(YEAR, year);
+        day(day);
+        month(month);
+        year(year);
     }
 
     private DateBuilder(Date date) {
@@ -173,6 +173,16 @@ public class DateBuilder {
     }
 
     /**
+     * Returns the current DateBuilder instance with the day of month set to the given day.
+     * @param day the day.
+     * @return the modified DateBuilder instance.
+     */
+    public DateBuilder day(int day) {
+        calendar.set(DAY_OF_MONTH, day);
+        return this;
+    }
+
+    /**
      * Returns the current DateBuilder instance decremented by the given number of months.
      * @param months the number of months.
      * @return the decremented DateBuilder instance.
@@ -192,6 +202,16 @@ public class DateBuilder {
     }
 
     /**
+     * Returns the current DateBuilder instance with the month of year set to the given month.
+     * @param month the month.
+     * @return the modified DateBuilder instance.
+     */
+    public DateBuilder month(int month) {
+        calendar.set(MONTH, month - 1);
+        return this;
+    }
+
+    /**
      * Returns the current DateBuilder instance decremented by the given number of years.
      * @param years the number of years.
      * @return the decremented DateBuilder instance.
@@ -207,6 +227,16 @@ public class DateBuilder {
      */
     public DateBuilder yearsAhead(int years) {
         calendar.add(YEAR, years);
+        return this;
+    }
+
+    /**
+     * Returns the current DateBuilder instance with the year set to the given year.
+     * @param year the year.
+     * @return the modified DateBuilder instance.
+     */
+    public DateBuilder year(int year) {
+        calendar.set(YEAR, year);
         return this;
     }
 

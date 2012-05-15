@@ -96,6 +96,13 @@ public class DateBuilderTests {
     }
 
     @Test
+    public void testDay() {
+        assertEquals(DateBuilder.givenDate( 1, 12, 1972), DateBuilder.givenDate(14, 12, 1972).day(1));
+        assertEquals(DateBuilder.givenDate(10, 12, 1972), DateBuilder.givenDate(14, 12, 1972).day(10));
+        assertEquals(DateBuilder.givenDate( 1,  1, 1973), DateBuilder.givenDate(14, 12, 1972).day(32));
+    }
+
+    @Test
     public void testMonthsAgo() {
         Locale.setDefault(Locale.GERMANY);
         assertEquals(DateBuilder.givenDate(14, 11, 1972), DateBuilder.givenDate(14, 12, 1972).monthsAgo(1));
@@ -116,6 +123,13 @@ public class DateBuilderTests {
     }
 
     @Test
+    public void testMonth() {
+        assertEquals(DateBuilder.givenDate(14,  1, 1972), DateBuilder.givenDate(14, 12, 1972).month(1));
+        assertEquals(DateBuilder.givenDate(14, 10, 1972), DateBuilder.givenDate(14, 12, 1972).month(10));
+        assertEquals(DateBuilder.givenDate(14,  1, 1973), DateBuilder.givenDate(14, 12, 1972).month(13));
+    }
+
+    @Test
     public void testYearsAgo() {
         Locale.setDefault(Locale.GERMANY);
         assertEquals(DateBuilder.givenDate(14, 12, 1971), DateBuilder.givenDate(14, 12, 1972).yearsAgo(1));
@@ -129,6 +143,12 @@ public class DateBuilderTests {
         assertEquals(DateBuilder.givenDate(14, 12, 1973), DateBuilder.givenDate(14, 12, 1972).yearsAhead(1));
         assertEquals(DateBuilder.givenDate(14, 12, 1972), DateBuilder.givenDate(14, 12, 1972).yearsAhead(0));
         assertEquals(DateBuilder.givenDate(14, 12, 1970), DateBuilder.givenDate(14, 12, 1972).yearsAhead(-2));
+    }
+
+    @Test
+    public void testYear() {
+        assertEquals(DateBuilder.givenDate(14, 12, 1970), DateBuilder.givenDate(14, 12, 1972).year(1970));
+        assertEquals(DateBuilder.givenDate(14, 12, 2012), DateBuilder.givenDate(14, 12, 1972).year(2012));
     }
 
     @Test
