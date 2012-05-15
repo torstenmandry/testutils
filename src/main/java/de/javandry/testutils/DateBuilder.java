@@ -138,9 +138,7 @@ public class DateBuilder {
 
         DateBuilder that = (DateBuilder) o;
 
-        if (calendar != null ? !calendar.equals(that.calendar) : that.calendar != null) return false;
-
-        return true;
+        return !(calendar != null ? !calendar.equals(that.calendar) : that.calendar != null);
     }
 
     @Override
