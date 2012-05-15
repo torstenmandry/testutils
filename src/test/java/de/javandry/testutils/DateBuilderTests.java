@@ -75,6 +75,17 @@ public class DateBuilderTests {
     }
 
     @Test
+    public void daysAhead() {
+        Locale.setDefault(Locale.GERMANY);
+        assertEquals(DateBuilder.givenDate(14, 12, 1972).daysAhead(2), DateBuilder.givenDate(16, 12, 1972));
+        assertEquals(DateBuilder.givenDate(14, 12, 1972).daysAhead(5), DateBuilder.givenDate(19, 12, 1972));
+        assertEquals(DateBuilder.givenDate(30, 11, 1972).daysAhead(1), DateBuilder.givenDate(1, 12, 1972));
+        assertEquals(DateBuilder.givenDate(31, 12, 1972).daysAhead(1), DateBuilder.givenDate(1, 1, 1973));
+        assertEquals(DateBuilder.givenDate(14, 12, 1972).daysAhead(0), DateBuilder.givenDate(14, 12, 1972));
+        assertEquals(DateBuilder.givenDate(14, 12, 1972).daysAhead(-2), DateBuilder.givenDate(12, 12, 1972));
+    }
+
+    @Test
     public void equals() {
         Locale.setDefault(Locale.GERMANY);
         DateBuilder givenDate = DateBuilder.givenDate(14, 12, 1972);

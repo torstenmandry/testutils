@@ -73,7 +73,11 @@ public class DateBuilder {
     }
 
     public DateBuilder daysAgo(int days) {
-        calendar.add(DAY_OF_MONTH, -days);
+        return daysAhead(-days);
+    }
+
+    public DateBuilder daysAhead(int days) {
+        calendar.add(DAY_OF_MONTH, days);
         return this;
     }
 
@@ -101,4 +105,5 @@ public class DateBuilder {
     public int hashCode() {
         return calendar != null ? calendar.hashCode() : 0;
     }
+
 }
