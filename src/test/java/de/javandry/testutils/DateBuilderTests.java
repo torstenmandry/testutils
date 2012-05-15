@@ -22,12 +22,12 @@ public class DateBuilderTests {
     }
 
     @Test
-    public void today() {
+    public void testToday() {
         assertEqualsCalendar(calendar, DateBuilder.today());
     }
 
     @Test
-    public void givenDate() {
+    public void testGivenDate() {
         DateBuilder givenDate = DateBuilder.givenDate(14, 12, 1972);
 
         assertEquals(14, givenDate.getDay());
@@ -36,19 +36,19 @@ public class DateBuilderTests {
     }
 
     @Test
-    public void valueOfUtilDate() {
+    public void testValueOfUtilDate() {
         java.util.Date utilDate = calendar.getTime();
         assertEqualsCalendar(calendar, DateBuilder.valueOf(utilDate));
     }
 
     @Test
-    public void valueOfSqlDate() {
+    public void testValueOfSqlDate() {
         java.sql.Date sqlDate = new java.sql.Date(calendar.getTimeInMillis());
         assertEqualsCalendar(calendar, DateBuilder.valueOf(sqlDate));
     }
 
     @Test
-    public void parseString() {
+    public void testParseString() {
         Locale.setDefault(Locale.GERMANY);
         assertEquals(DateBuilder.givenDate(14, 12, 1972), DateBuilder.parse("14.12.1972"));
         Locale.setDefault(Locale.US);
@@ -74,7 +74,7 @@ public class DateBuilderTests {
     }
 
     @Test
-    public void daysAgo() {
+    public void testDaysAgo() {
         Locale.setDefault(Locale.GERMANY);
         assertEquals(DateBuilder.givenDate(14, 12, 1972).daysAgo(2), DateBuilder.givenDate(12, 12, 1972));
         assertEquals(DateBuilder.givenDate(14, 12, 1972).daysAgo(5), DateBuilder.givenDate(9, 12, 1972));
@@ -85,7 +85,7 @@ public class DateBuilderTests {
     }
 
     @Test
-    public void daysAhead() {
+    public void testDaysAhead() {
         Locale.setDefault(Locale.GERMANY);
         assertEquals(DateBuilder.givenDate(14, 12, 1972).daysAhead(2), DateBuilder.givenDate(16, 12, 1972));
         assertEquals(DateBuilder.givenDate(14, 12, 1972).daysAhead(5), DateBuilder.givenDate(19, 12, 1972));
@@ -96,7 +96,7 @@ public class DateBuilderTests {
     }
 
     @Test
-    public void equals() {
+    public void testEquals() {
         Locale.setDefault(Locale.GERMANY);
         DateBuilder givenDate = DateBuilder.givenDate(14, 12, 1972);
 
@@ -107,7 +107,7 @@ public class DateBuilderTests {
     }
 
     @Test
-    public void toUtilDate() {
+    public void testToUtilDate() {
         DateBuilder dateBuilder = DateBuilder.givenDate(14, 12, 1972);
 
         Calendar utilDateCalendar = calendarFor(dateBuilder.toDate());
@@ -119,7 +119,7 @@ public class DateBuilderTests {
     }
 
     @Test
-    public void toSqlDate() {
+    public void testToSqlDate() {
         DateBuilder dateBuilder = DateBuilder.givenDate(14, 12, 1972);
 
         java.sql.Date sqlDate = dateBuilder.toSqlDate();
