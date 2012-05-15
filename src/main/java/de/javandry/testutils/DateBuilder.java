@@ -30,6 +30,10 @@ public class DateBuilder {
         return new DateBuilder(dateString);
     }
 
+    public static DateBuilder parse(String dateString, Locale locale) {
+        return new DateBuilder(dateString, locale);
+    }
+
     private DateBuilder() {
         calendar = new GregorianCalendar();
         calendar.set(HOUR_OF_DAY, 0);
@@ -51,10 +55,13 @@ public class DateBuilder {
     }
 
     public DateBuilder(String dateString) {
+        this(dateString, Locale.getDefault());
+    }
+
+    public DateBuilder(String dateString, Locale locale) {
         this();
-        DateFormat dateFormat = DateFormat.getDateInstance();
         try {
-            calendar.setTime(dateFormat.parse(dateString));
+            calendar.setTime(DateFormat.getDateInstance(DateFormat.DEFAULT, locale).parse(dateString));
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
@@ -110,5 +117,4 @@ public class DateBuilder {
     public int hashCode() {
         return calendar != null ? calendar.hashCode() : 0;
     }
-
 }

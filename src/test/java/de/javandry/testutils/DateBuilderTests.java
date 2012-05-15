@@ -48,19 +48,21 @@ public class DateBuilderTests {
     }
 
     @Test
-    // TODO Weitere Beispiele mit anderen Locales und Formaten
     public void parseString() {
-        parseString(Locale.GERMANY, "14.12.1972", 14, 12, 1972);
-        parseString(Locale.GERMANY, "29.02.2012", 29, 2, 2012);
+        Locale.setDefault(Locale.GERMANY);
+        assertEquals(DateBuilder.givenDate(14, 12, 1972), DateBuilder.parse("14.12.1972"));
+        Locale.setDefault(Locale.US);
+        assertEquals(DateBuilder.givenDate(14, 12, 1972), DateBuilder.parse("Dec 14, 1972"));
+        Locale.setDefault(Locale.UK);
+        assertEquals(DateBuilder.givenDate(14, 12, 1972), DateBuilder.parse("14-Dec-1972"));
     }
 
-    private void parseString(Locale locale, String dateString, int expectedDay, int expectedMonth, int expectedYear) {
-        Locale.setDefault(locale);
-        DateBuilder dateBuilder = DateBuilder.parse(dateString);
-
-        assertEquals(expectedDay, dateBuilder.getDay());
-        assertEquals(expectedMonth, dateBuilder.getMonth());
-        assertEquals(expectedYear, dateBuilder.getYear());
+    @Test
+    public void testParseStringWithGivenLocale() {
+        Locale.setDefault(Locale.CHINESE);
+        assertEquals(DateBuilder.givenDate(14, 12, 1972), DateBuilder.parse("14.12.1972", Locale.GERMANY));
+        assertEquals(DateBuilder.givenDate(14, 12, 1972), DateBuilder.parse("Dec 14, 1972", Locale.US));
+        assertEquals(DateBuilder.givenDate(14, 12, 1972), DateBuilder.parse("14-Dec-1972", Locale.UK));
     }
 
     @Test
