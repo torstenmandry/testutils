@@ -109,6 +109,15 @@ public class DateBuilder {
         return this;
     }
 
+    public DateBuilder yearsAgo(int years) {
+        return yearsAhead(-years);
+    }
+
+    public DateBuilder yearsAhead(int years) {
+        calendar.add(YEAR, years);
+        return this;
+    }
+
     public Date toDate() {
         return calendar.getTime();
     }
