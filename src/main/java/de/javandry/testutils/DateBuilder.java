@@ -212,7 +212,7 @@ public class DateBuilder {
      * @return the modified DateBuilder instance.
      */
     public DateBuilder lastDay() {
-        return monthsAhead(1).firstDay().daysAgo(1);
+        return nextMonth().firstDay().daysAgo(1);
     }
 
     /**
