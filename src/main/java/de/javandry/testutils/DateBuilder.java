@@ -15,8 +15,9 @@ import static java.util.Calendar.*;
  * <br/>
  * Examples:<br/>
  * <code>
- *     DateBuilder.today().daysAgo(2);
- *     DateBuilder.givenDate(15, 5, 2012).monthsAhead(4);
+ *     DateBuilder.today().daysAgo(2); // two days ago from today
+ *     DateBuilder.givenDate(15, 5, 2012).monthsAhead(4); // 15-09-2012
+ *     DateBuilder.today().day(1).monthAhead(1); // first day of next month
  * </code>
  */
 public class DateBuilder {
