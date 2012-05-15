@@ -110,10 +110,12 @@ public class DateBuilderTests {
         Locale.setDefault(Locale.GERMANY);
         DateBuilder givenDate = DateBuilder.givenDate(14, 12, 1972);
 
-        assertTrue(givenDate.equals(givenDate));
-        assertTrue(givenDate.equals(DateBuilder.givenDate(14, 12, 1972)));
-        assertTrue(givenDate.equals(DateBuilder.parse("14.12.1972")));
+        assertTrue (givenDate.equals(givenDate));
+        assertTrue (givenDate.equals(DateBuilder.givenDate(14, 12, 1972)));
+        assertTrue (givenDate.equals(DateBuilder.parse("14.12.1972")));
         assertFalse(givenDate.equals(DateBuilder.givenDate(14, 12, 1973)));
+        assertFalse(givenDate.equals(DateBuilder.givenDate(14, 11, 1972)));
+        assertFalse(givenDate.equals(DateBuilder.givenDate(13, 12, 1972)));
     }
 
     @Test
