@@ -100,6 +100,11 @@ public class DateBuilder {
         return this;
     }
 
+    public DateBuilder monthsAgo(int months) {
+        calendar.add(MONTH, -months);
+        return this;
+    }
+
     public Date toDate() {
         return calendar.getTime();
     }
