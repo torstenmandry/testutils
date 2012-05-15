@@ -129,7 +129,6 @@ public class DateBuilderTests {
 
     @Test
     public void testMonthsAgo() {
-        Locale.setDefault(Locale.GERMANY);
         assertEquals(DateBuilder.givenDate(14, 11, 1972), DateBuilder.givenDate(14, 12, 1972).monthsAgo(1));
         assertEquals(DateBuilder.givenDate(14,  7, 1972), DateBuilder.givenDate(14, 12, 1972).monthsAgo(5));
         assertEquals(DateBuilder.givenDate( 1, 12, 1971), DateBuilder.givenDate( 1,  1, 1972).monthsAgo(1));
@@ -138,8 +137,13 @@ public class DateBuilderTests {
     }
 
     @Test
+    public void testPreviousMonth() {
+        assertEquals(DateBuilder.givenDate(14, 11, 1972), DateBuilder.givenDate(14, 12, 1972).previousMonth());
+        assertEquals(DateBuilder.givenDate(14,  7, 1972), DateBuilder.givenDate(14,  8, 1972).previousMonth());
+    }
+
+    @Test
     public void testMonthsAhead() {
-        Locale.setDefault(Locale.GERMANY);
         assertEquals(DateBuilder.givenDate(14, 12, 1972), DateBuilder.givenDate(14, 10, 1972).monthsAhead(2));
         assertEquals(DateBuilder.givenDate(14,  6, 1972), DateBuilder.givenDate(14,  1, 1972).monthsAhead(5));
         assertEquals(DateBuilder.givenDate( 1,  1, 1973), DateBuilder.givenDate( 1, 12, 1972).monthsAhead(1));
@@ -148,10 +152,28 @@ public class DateBuilderTests {
     }
 
     @Test
+    public void nextMonth() {
+        assertEquals(DateBuilder.givenDate(14, 11, 1972), DateBuilder.givenDate(14, 10, 1972).nextMonth());
+        assertEquals(DateBuilder.givenDate(14,  1, 1973), DateBuilder.givenDate(14, 12, 1972).nextMonth());
+    }
+
+    @Test
     public void testMonth() {
         assertEquals(DateBuilder.givenDate(14,  1, 1972), DateBuilder.givenDate(14, 12, 1972).month(1));
         assertEquals(DateBuilder.givenDate(14, 10, 1972), DateBuilder.givenDate(14, 12, 1972).month(10));
         assertEquals(DateBuilder.givenDate(14,  1, 1973), DateBuilder.givenDate(14, 12, 1972).month(13));
+    }
+
+    @Test
+    public void testFirstMonth() {
+        assertEquals(DateBuilder.givenDate(14,  1, 1972), DateBuilder.givenDate(14, 12, 1972).firstMonth());
+        assertEquals(DateBuilder.givenDate(14,  1, 1972), DateBuilder.givenDate(14,  3, 1972).firstMonth());
+    }
+
+    @Test
+    public void testLastMonth() {
+        assertEquals(DateBuilder.givenDate(14, 12, 1972), DateBuilder.givenDate(14, 10, 1972).lastMonth());
+        assertEquals(DateBuilder.givenDate(14, 12, 1972), DateBuilder.givenDate(14,  3, 1972).lastMonth());
     }
 
     @Test

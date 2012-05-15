@@ -11,7 +11,7 @@ import java.util.Locale;
 import static java.util.Calendar.*;
 
 /**
- * Utility class for build date values.<br/>
+ * Utility class for building/defining gregorian date values.<br/>
  * <br/>
  * Examples:<br/>
  * <code>
@@ -225,6 +225,14 @@ public class DateBuilder {
     }
 
     /**
+     * Returns the current DateBuilder instance decremented by one month.
+     * @return the decremented DateBuilder instance.
+     */
+    public DateBuilder previousMonth() {
+        return monthsAgo(1);
+    }
+
+    /**
      * Returns the current DateBuilder instance incremented by the given number of months.
      * @param months the number of months.
      * @return the incremented DateBuilder instance.
@@ -235,6 +243,14 @@ public class DateBuilder {
     }
 
     /**
+     * Returns the current DateBuilder instance incremented by one month.
+     * @return the incremented DateBuilder instance.
+     */
+    public DateBuilder nextMonth() {
+        return monthsAhead(1);
+    }
+
+    /**
      * Returns the current DateBuilder instance with the month of year set to the given month.
      * @param month the month.
      * @return the modified DateBuilder instance.
@@ -242,6 +258,22 @@ public class DateBuilder {
     public DateBuilder month(int month) {
         calendar.set(MONTH, month - 1);
         return this;
+    }
+
+    /**
+     * Returns the current DateBuilder instance set to the first month of the year.
+     * @return the modified DateBuilder instance.
+     */
+    public DateBuilder firstMonth() {
+        return month(1);
+    }
+
+    /**
+     * Returns the current DateBuilder instance set to the last month of the year.
+     * @return the modified DateBuilder instance.
+     */
+    public DateBuilder lastMonth() {
+        return month(12);
     }
 
     /**
