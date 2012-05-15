@@ -101,7 +101,11 @@ public class DateBuilder {
     }
 
     public DateBuilder monthsAgo(int months) {
-        calendar.add(MONTH, -months);
+        return monthsAhead(-months);
+    }
+
+    public DateBuilder monthsAhead(int months) {
+        calendar.add(MONTH, months);
         return this;
     }
 

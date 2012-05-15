@@ -106,6 +106,16 @@ public class DateBuilderTests {
     }
 
     @Test
+    public void testMonthsAhead() {
+        Locale.setDefault(Locale.GERMANY);
+        assertEquals(DateBuilder.givenDate(14, 12, 1972), DateBuilder.givenDate(14, 10, 1972).monthsAhead(2));
+        assertEquals(DateBuilder.givenDate(14,  6, 1972), DateBuilder.givenDate(14,  1, 1972).monthsAhead(5));
+        assertEquals(DateBuilder.givenDate( 1,  1, 1973), DateBuilder.givenDate( 1, 12, 1972).monthsAhead(1));
+        assertEquals(DateBuilder.givenDate(14, 12, 1972), DateBuilder.givenDate(14, 12, 1972).monthsAhead(0));
+        assertEquals(DateBuilder.givenDate(14, 10, 1972), DateBuilder.givenDate(14, 12, 1972).monthsAhead(-2));
+    }
+
+    @Test
     public void testEquals() {
         Locale.setDefault(Locale.GERMANY);
         DateBuilder givenDate = DateBuilder.givenDate(14, 12, 1972);
